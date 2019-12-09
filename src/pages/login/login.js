@@ -1,19 +1,36 @@
 import React, { Component } from 'react';
 import './login.css';
 import logo from './images/logo.svg';
-import { Form, Icon, Input, Button } from 'antd';
+import { Form, Icon, Input, Button, message } from 'antd';
+import {reqLogin, reqAddUser} from '../../api';
+import memoryUtils from '../../utils/memoryUtils';
 /**
  * 登陆的路由组件
  */
 
 class Login extends Component {
 
-    handleSubmit = e => {
+    handleSubmit = async (e) => {
         e.preventDefault();
-        this.props.form.validateFields((err, values) => {
+        this.props.form.validateFields(async (err, values) => {
           if (!err) {
-            console.log('Received values of form: ', values);
+            const result = await reqLogin(values.username, values.password);
+            if (!result.status) {
+                //登陆成功
+                message.success("登陆成功");
+                const user = result.data;
+                memoryUtils.user = user;
+                //跳转到管理界面(不需要回退到登陆界面)
+                this.props.history.replace('/')
+            } else {
+                //提示错误信息
+                message.error(result.message);
+            }
+            console.log('success', result.data);
+          } else {
+              console.log("检验失败");
           }
+
         });
     };
     validatePass = (rule, value, callback) => {
@@ -50,7 +67,7 @@ class Login extends Component {
                             //声明式验证
                             rules: [
                                 { required: true,whitespace: true, message: '请输入有效的用户名' },
-                                { min: 6, message: '用户名至少6位' },
+                                { min: 4, message: '用户名至少6位' },
                                 { max: 20, message: '用户名最多20位' },
                                 { pattern: /^[a-zA-Z0-9_]+$/, message: '用户名必须是英文、数字下划线' }
                             ],
