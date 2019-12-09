@@ -37,3 +37,12 @@
 .login .login-content .login-form .login-form-button{
     width: 100%;
 }
+
+#components-layout-demo-responsive .logo {
+    height: 32px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 16px;
+}
+#adminPage{
+    height: 100%;
+}
