@@ -4,6 +4,9 @@ import logo from './images/logo.svg';
 import { Form, Icon, Input, Button, message } from 'antd';
 import {reqLogin, reqAddUser} from '../../api';
 import memoryUtils from '../../utils/memoryUtils';
+import storageUtils from '../../utils/storageUtils';
+import { Redirect } from 'react-router-dom';
+
 /**
  * 登陆的路由组件
  */
@@ -20,13 +23,13 @@ class Login extends Component {
                 message.success("登陆成功");
                 const user = result.data;
                 memoryUtils.user = user;
+                storageUtils.saveUser(user);
                 //跳转到管理界面(不需要回退到登陆界面)
                 this.props.history.replace('/')
             } else {
                 //提示错误信息
-                message.error(result.message);
+                message.error(result.msg);
             }
-            console.log('success', result.data);
           } else {
               console.log("检验失败");
           }
@@ -52,6 +55,12 @@ class Login extends Component {
         }
     }
     render() {
+        //判断用户登陆， 如果已经登陆，自动跳转到管理界面
+        const user = memoryUtils.user;
+        if (!user && !user._id) {
+            //自动跳转到登陆（在render()中）
+            return <Redirect to="/" /> 
+        }
         const { getFieldDecorator } = this.props.form;
         return (
             <div className="login">
