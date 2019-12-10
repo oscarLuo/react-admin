@@ -12,7 +12,8 @@ import User from '../user/User';
 import Bar from '../chart/Bar';
 import Line from '../chart/Line';
 import Pie from '../chart/Pie';
-const { Header, Content, Footer, Sider } = Layout;
+import Header from '../../components/header/Header'
+const { Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 export default class Admin extends Component {
     render() {
@@ -81,21 +82,21 @@ export default class Admin extends Component {
                     </Menu>
                 </Sider>
                 <Layout>
-                <Header style={{ background: '#fff', padding: 0 }} />
-                <Content style={{ margin: '24px 16px 0' }}>
-                    <Switch>
-                        <Route path="/home" component={Home}></Route>
-                        <Route path="/category" component={Category}></Route>
-                        <Route path="/product" component={Product}></Route>
-                        <Route path="/role" component={Role}></Route>
-                        <Route path="/user" component={User}></Route>
-                        <Route path="/charts/bar" component={Bar}></Route>
-                        <Route path="/charts/line" component={Line}></Route>
-                        <Route path="/pie" component={Pie}></Route>
-                        <Redirect to="/home" />
-                    </Switch>
-                </Content>
-                <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+                    <Header style={{ background: '#fff', padding: 0 }} />
+                    <Content style={{ margin: '20px' , backgroundColor: 'white'}}>
+                        <Switch>
+                            <Route path="/home" component={Home} title="主页"></Route>
+                            <Route path="/category" component={Category}></Route>
+                            <Route path="/product" component={Product}></Route>
+                            <Route path="/role" component={Role}></Route>
+                            <Route path="/user" component={User}></Route>
+                            <Route path="/charts/bar" component={Bar}></Route>
+                            <Route path="/charts/line" component={Line}></Route>
+                            <Route path="/pie" component={Pie}></Route>
+                            <Redirect to="/home" />
+                        </Switch>
+                    </Content>
+                    <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
                 </Layout>
             </Layout>
         )
