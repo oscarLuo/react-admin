@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import memoryUtils from '../../utils/memoryUtils';
-import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Layout, Menu, Icon } from 'antd';
 import Home from '../home/Home';

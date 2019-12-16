@@ -6,6 +6,7 @@ import storageUtils from '../../utils/storageUtils';
 import {reqWeather} from '../../api';
 import {withRouter} from 'react-router-dom';
 import { Modal } from 'antd';
+import  LinkButton from "../link-button/LinkButton";
 
 class Header extends Component {
     state = {
@@ -55,7 +56,7 @@ class Header extends Component {
             <div className="header">
                 <div className="header-top">
                     <span>欢迎， {username}</span>
-                    <a href="javascript:" onClick={this.logout}>退出</a>
+                    <LinkButton onClick={this.logout}>退出</LinkButton>
                 </div>
                 <div className="header-bottom">
                     <div className="header-bottom-left">{this.getTitle()}</div>

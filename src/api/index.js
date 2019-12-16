@@ -6,11 +6,27 @@ import ajax from './ajax';
 import jsonp from 'jsonp';
 import { message } from 'antd';
 
+const method = {
+    post: 'POST',
+    get: 'GET',
+    delete: 'DELETE',
+    put: 'PUT'
+}
 //登陆
-export const reqLogin = (username, password) => ajax('/login', {username, password}, 'POST');
+export const reqLogin = (username, password) => ajax('/login', {username, password}, method.post);
 
 //添加用户
-export const reqAddUser = (user)=> ajax('/manage/user/add', user, 'POST');
+export const reqAddUser = (user)=> ajax('/manage/user/add', user, method.post);
+
+//请求分类列表
+export const reqCategory = (parentId) => ajax('/manage/category/list', {parentId}, method.get);
+
+//添加分类列表
+export const reqAddCategory = ({parentId, categoryName}) => ajax('/manage/category/add', {parentId, categoryName}, method.post);
+
+//添加分类列表
+export const reqUpdateCategory = ({categoryId, categoryName}) => ajax('/manage/category/update', {categoryId, categoryName}, method.post);
+
 
 //jsonp请求天气接口请求函数
 export const reqWeather = (city) => {
